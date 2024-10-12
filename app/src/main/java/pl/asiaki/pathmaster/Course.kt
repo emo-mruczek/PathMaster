@@ -22,6 +22,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.encodeToString
@@ -169,7 +170,7 @@ fun Course(
                 val intent = Intent(context, CourseActivity::class.java)
                 intent.putExtra("course", Json.encodeToString(course))
                 context.startActivity(intent)
-            }.clip(RoundedCornerShape(20.dp)).background(Salmon).padding(5.dp),
+            }.clip(RoundedCornerShape(20.dp)).background(Salmon),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Row(
@@ -201,7 +202,9 @@ fun Course(
 
         HorizontalDivider(thickness = 2.dp)
 
-        Text(course.description, Modifier.padding(10.dp))
+        Text(course.description, Modifier.padding(10.dp),
+            fontSize = 4.em
+        )
     }
 }
 

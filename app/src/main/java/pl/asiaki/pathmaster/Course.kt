@@ -27,11 +27,11 @@ enum class CourseLevel(val upperPointBound: UInt, val colour: Color) {
 
     companion object {
         fun level(points: UInt): CourseLevel {
-            return if (points <= 100u)      { BASIC }
-                else if (points <= 500u)    { EASY }
-                else if (points <= 1500u)   { MEDIUM }
-                else if (points <= 5000u)   { HARD }
-                else                        { EXTREME }
+            return if (points <= BASIC.upperPointBound)    { BASIC }
+                else if (points <= EASY.upperPointBound)   { EASY }
+                else if (points <= MEDIUM.upperPointBound) { MEDIUM }
+                else if (points <= HARD.upperPointBound)   { HARD }
+                else                                       { EXTREME }
         }
     }
 }

@@ -53,12 +53,18 @@ fun Profile(name: String, lvl: Int) {
             )
         }
         Column(Modifier.fillMaxWidth().padding(top = 25.dp),horizontalAlignment = Alignment.CenterHorizontally) {
+            Text(
+                text = "LATEST COURSES"
+            )
+            //TODO: buttor
+            Text(
+                text = "More courses ->"
+            )
+
             CoursesList();
         }
     }
 }
-
-
 
 @Preview
 @Composable

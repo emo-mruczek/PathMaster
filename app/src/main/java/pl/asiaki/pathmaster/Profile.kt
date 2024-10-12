@@ -59,29 +59,22 @@ fun Profile(name: String, lvl: Int) {
                     .clip(RoundedCornerShape(200.dp))
             )
         }
-        Column(
-            Modifier.fillMaxWidth()
-                .padding(top = 25.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
+        WalletComposable(VALUE)
+        Row(
+            Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-            WalletComposable(VALUE)
-            Row(
-                Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceEvenly
-            ) {
-                Text(
-                    text = "LATEST COURSES"
-                )
-                //TODO: buttor
-                Text(
-                    text = "More courses ->"
-                )
+            Text(
+                text = "LATEST COURSES"
+            )
+            //TODO: buttor
+            Text(
+                text = "More courses ->"
+            )
 
-            }
-
-            CoursesList(COURSES)
         }
+        CoursesList(COURSES)
     }
 }
 

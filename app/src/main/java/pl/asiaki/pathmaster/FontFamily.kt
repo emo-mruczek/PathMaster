@@ -14,6 +14,5 @@ val robotoFamily = FontFamily(
     Font(R.font.robotobold, FontWeight.Bold),
     Font(R.font.robotomediumitalic, FontWeight.Medium, FontStyle.Italic),
     Font(R.font.robotobolditalic, FontWeight.Bold, FontStyle.Italic),
-
 )
 

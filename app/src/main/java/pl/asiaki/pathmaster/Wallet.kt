@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -17,8 +18,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.em
+import androidx.compose.ui.unit.sp
 import pl.asiaki.pathmaster.ui.theme.Orange
 import pl.asiaki.pathmaster.ui.theme.Pink
 import pl.asiaki.pathmaster.ui.theme.White
@@ -26,43 +30,56 @@ import pl.asiaki.pathmaster.ui.theme.White
 @Composable
 fun WalletComposable(amount: UInt) {
     val brush = Brush.linearGradient(listOf(Orange, Pink))
-    Box(Modifier.background(brush)) {
+    Column(Modifier.clip(RoundedCornerShape(20.dp)).background(brush).padding(5.dp)) {
+
         Row(
-            Modifier.fillMaxWidth(),
+            Modifier.padding(5.dp),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceEvenly
+            horizontalArrangement = Arrangement.SpaceEvenly,
         ) {
             Text(
-                text = "WALLET",
-                color = White
+                text = "PORTMONETKA",
+                color = White,
+                fontFamily = robotoFamily,
+                fontWeight = FontWeight.Medium,
+                fontSize = 30.sp
             )
             //TODO: buttor
-            Text(
-                text = "Check balance ->",
-                color = White
-            )
+            /*Text(
+                text = "Sprawdz ->",
+                color = White,
+                fontFamily = robotoFamily,
+                fontWeight = FontWeight.Light,
+                fontSize = 15.sp
+            )*/
         }
         Row(
-            Modifier.fillMaxWidth(),
+            Modifier.padding(10.dp).fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-            val image = painterResource(R.drawable.hat)
+            val image = painterResource(R.drawable.hat_white)
             Image(
                 painter = image,
                 contentDescription = "MsT icon",
-                modifier = Modifier
+                modifier = Modifier.padding(10.dp)
                     .size(100.dp)
-                    .padding(20.dp)
+
             )
             //TODO: buttor
             Text(
                 text = "$amount",
-                color = White
+                color = White,
+                fontFamily = robotoFamily,
+                fontWeight = FontWeight.Bold,
+                fontSize = 45.sp
             )
             Text(
                 text = "MsT",
-                color = White
+                color = White,
+                fontSize = 25.sp,
+                fontFamily = robotoFamily,
+                fontWeight = FontWeight.Normal
             )
         }
     }

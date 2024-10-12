@@ -18,6 +18,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color.Companion.Black
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
@@ -42,6 +44,8 @@ fun Profile(name: String, lvl: Int) {
                     text = name,
                     color = Black,
                     fontSize = 7.5.em,
+                    fontFamily = robotoFamily,
+                    fontWeight = FontWeight.Bold
                 )
                 Text(
                     text = "Level: $lvl",
@@ -49,7 +53,7 @@ fun Profile(name: String, lvl: Int) {
                     fontSize = 6.em
                 )
             }
-            val image = painterResource(R.drawable.blank_avatar)
+            val image = painterResource(R.drawable.pfp_new)
             Image(
                 painter = image,
                 contentDescription = "avatar",
@@ -62,18 +66,25 @@ fun Profile(name: String, lvl: Int) {
         }
         WalletComposable(VALUE)
         Row(
-            Modifier.fillMaxWidth(),
+            Modifier.padding(top = 20.dp, bottom = 10.dp).fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
             Text(
-                text = "LATEST COURSES"
+                text = "OSTATNIE KURSY",
+                color = Black,
+                fontSize = 6.5.em,
+                fontFamily = robotoFamily,
+                fontWeight = FontWeight.Light
             )
             //TODO: buttor
             Text(
-                text = "More courses ->"
+                text = "Więcej ->",
+                color = Black,
+                fontSize = 3.5.em,
+                fontFamily = robotoFamily,
+                fontWeight = FontWeight.Bold
             )
-
         }
         CoursesList(COURSES)
     }

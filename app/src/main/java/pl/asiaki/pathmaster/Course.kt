@@ -5,24 +5,32 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.font.FontWeight.Companion.Bold
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import pl.asiaki.pathmaster.ui.theme.Red
+import pl.asiaki.pathmaster.ui.theme.Salmon
 
 enum class CourseLevel(val upperPointBound: UInt, val colour: Color) {
     BASIC(100u, Color.Blue),
@@ -156,15 +164,11 @@ fun Course(
     Column(
         Modifier
             .height(IntrinsicSize.Min)
-            .border(
-                width = 5.dp,
-                color = Color.Black,
-            )
             .clickable {
                 val intent = Intent(context, CourseActivity::class.java)
                 intent.putExtra("course", Json.encodeToString(course))
                 context.startActivity(intent)
-            },
+            }.clip(RoundedCornerShape(20.dp)).background(Salmon).padding(5.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Row(
@@ -172,11 +176,24 @@ fun Course(
                 .padding(10.dp)
                 .fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceAround,
+           horizontalArrangement = Arrangement.SpaceBetween,
         ) {
-            Text(course.name)
-
-            Text("${course.points} pkt.", Modifier.background(CourseLevel.level(course.points).colour))
+            Text(course.name,
+                fontFamily = robotoFamily,
+                fontWeight = FontWeight.Medium,
+                fontSize = 25.sp,
+                color = Red
+                )
+            Row( Modifier.padding(2.dp).clip(RoundedCornerShape(15.dp))
+                .background(CourseLevel.level(course.points).colour),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center
+                ) {
+                Text(
+                    "${course.points} pkt.",
+                    fontSize = 15.sp
+                )
+            }
         }
 
         HorizontalDivider(thickness = 2.dp)

@@ -67,7 +67,23 @@ val COURSES = listOf(
         name = "HTML dla bystrzaków",
         description = "Poznaj sztukę pisania stron razem z tym kursem",
         points = 30u,
-        questions = listOf(),
+        questions = listOf(
+            QuestionData(
+                question = "Czy HTML jest językiem programowania?",
+                answers = listOf("Tak", "Nie", "To zależy"),
+                correctAnswer = 1,
+            ),
+            QuestionData(
+                question = "Co robi tag <marquee>?",
+                answers = listOf("Pozwala na animację tekstu, grafiki, bądź obrazów", "Nic nie robi", "Pogrubia zawarty w nim tekst"),
+                correctAnswer = 0,
+            ),
+            QuestionData(
+                question = "Rozwiń skrót HTML",
+                answers = listOf("HyperText Markdown Language", "Hiperaktywne Trolle Malują Lamy", "HyperText Markup Language"),
+                correctAnswer = 2,
+            ),
+        ),
     ),
     CourseData(
         name = "Wskaźniki na funkcję w C",
@@ -79,7 +95,23 @@ val COURSES = listOf(
         name = "Instalacja Arch Linuxa",
         description = "I use Arch BTW!",
         points = 2000u,
-        questions = listOf(),
+        questions = listOf(
+            QuestionData(
+                question = "Co to jest AUR?",
+                answers = listOf("To takie zwierzę", "Nie wiem", "Arch User Repository", "Jest to kryptowaluta"),
+                correctAnswer = 2,
+            ),
+            QuestionData(
+                question = "Jakie zwierzę jest maskotką Linuksa?",
+                answers = listOf("Pingwin", "Żyrafa", "Jeleń"),
+                correctAnswer = 0,
+            ),
+            QuestionData(
+                question = "Jakiego menadżera paczek używa Arch?",
+                answers = listOf("APT", "Manpac", "Pacman"),
+                correctAnswer = 2,
+            ),
+        ),
     ),
 )
 

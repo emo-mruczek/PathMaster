@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.paddingFromBaseline
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -56,6 +58,8 @@ fun Profile(name: String, lvl: Int) {
     }
 }
 
+
+
 @Preview
 @Composable
 fun ProfilePreview() {
@@ -66,23 +70,11 @@ fun ProfilePreview() {
 }
 
 @Composable
-fun CoursesList() {
-    Course(
-        name = "Podstawy Rusta",
-        description = "Ten kurs nauczy cię podstaw rusta",
-        points = 5,
-        accentColour = Color.Green
-    )
-    Course(
-        name = "Podstawy Rusta",
-        description = "Ten kurs nauczy cię podstaw rusta",
-        points = 5,
-        accentColour = Color.Green
-    )
-    Course(
-        name = "Podstawy Rusta",
-        description = "Ten kurs nauczy cię podstaw rusta",
-        points = 5,
-        accentColour = Color.Green
-    )
+fun CoursesList(courses: List<CourseData>) {
+    LazyColumn {
+        items(courses) { course ->
+            Course(course)
+        }
+    }
 }
+

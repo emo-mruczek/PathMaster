@@ -162,10 +162,9 @@ fun Course(
     course: CourseData,
 ) {
     val context = LocalContext.current
-
     Column(
         Modifier
-            .height(IntrinsicSize.Min)
+            .height(IntrinsicSize.Min).padding(5.dp)
             .clickable {
                 val intent = Intent(context, CourseActivity::class.java)
                 intent.putExtra("course", Json.encodeToString(course))
@@ -187,7 +186,7 @@ fun Course(
                 color = Red
                 )
             Row(
-                Modifier.padding(2.dp).clip(RoundedCornerShape(15.dp)),
+                Modifier.padding(3.dp).clip(RoundedCornerShape(15.dp)),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center
             ) {

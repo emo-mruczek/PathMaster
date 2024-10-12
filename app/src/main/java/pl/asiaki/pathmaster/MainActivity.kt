@@ -4,16 +4,27 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.ui.Modifier
+import pl.asiaki.pathmaster.ui.theme.Background
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            Profile(
-        name = "Maciuś",
-        lvl = 21,
-    )
+            Box(
+                modifier = Modifier.fillMaxSize().background(Background)
+
+            ) {
+                Profile(
+                    name = "Maciuś",
+                    lvl = 21,
+                )
+            }
+        }
         }
     }
-}
+

@@ -55,13 +55,45 @@ val COURSES = listOf(
         name = "Podstawy Rusta",
         description = "Ten kurs nauczy cię podstaw rusta",
         points = 250u,
-        questions = listOf(),
+        questions = listOf(
+            QuestionData(
+                question = "Co to jest Rust?",
+                answers = listOf("To taki język programowania", "Nie wiem", "To system operacyjny"),
+                correctAnswer = 2,
+            ),
+            QuestionData(
+                question = "Który fragment kodu poprawnie wypisze tekst?",
+                answers = listOf("println!(\"Hello World!\");", "println!(\"Hello World!);", "print(\"Hello World!\");"),
+                correctAnswer = 0,
+            ),
+            QuestionData(
+                question = "Jaki jest najlepszy język programowania?",
+                answers = listOf("Rust", "Rust", "Rust!!!"),
+                correctAnswer = 2,
+            ),
+        ),
     ),
     CourseData(
         name = "Wprowadzenie do Haskella",
         description = "Boisz się programowania funkcyjnego? Ten kurs jest dla ciebie!",
         points = 550u,
-        questions = listOf(),
+        questions = listOf(
+            QuestionData(
+                question = "Czy boisz się Haskella?",
+                answers = listOf("Tak", "Nie"),
+                correctAnswer = 0,
+            ),
+            QuestionData(
+                question = "Ile jest typów całkowitych w Haskellu?",
+                answers = listOf("Jeden", "Dwa", "Zero"),
+                correctAnswer = 1,
+            ),
+            QuestionData(
+                question = "Kiedy powstał Haskell?",
+                answers = listOf("2020", "1990", "1781"),
+                correctAnswer = 1,
+            ),
+        ),
     ),
     CourseData(
         name = "HTML dla bystrzaków",

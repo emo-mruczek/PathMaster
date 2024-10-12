@@ -43,6 +43,39 @@ data class CourseData(
     val questions: List<Question>,
 )
 
+val COURSES = listOf(
+    CourseData(
+        name = "Podstawy Rusta",
+        description = "Ten kurs nauczy cię podstaw rusta",
+        points = 250u,
+        questions = listOf(),
+    ),
+    CourseData(
+        name = "Wprowadzenie do Haskella",
+        description = "Boisz się programowania funkcyjnego? Ten kurs jest dla ciebie!",
+        points = 550u,
+        questions = listOf(),
+    ),
+    CourseData(
+        name = "HTML dla bystrzaków",
+        description = "Poznaj sztukę pisania stron razem z tym kursem",
+        points = 30u,
+        questions = listOf(),
+    ),
+    CourseData(
+        name = "Wskaźniki na funkcję w C",
+        description = "Tylko dla odważnych!",
+        points = 10000u,
+        questions = listOf(),
+    ),
+    CourseData(
+        name = "Instalacja Arch Linuxa",
+        description = "I use Arch BTW!",
+        points = 2000u,
+        questions = listOf(),
+    ),
+)
+
 @Composable
 fun Course(
     course: CourseData,
@@ -77,11 +110,5 @@ fun Course(
 @Preview
 @Composable
 fun CoursePreview() {
-    Course(CourseData(
-        name = "Podstawy Rusta",
-        description = "Ten kurs nauczy cię podstaw rusta",
-        points = 250u,
-        questions = listOf(),
-    ))
+    Course(COURSES[0])
 }
-

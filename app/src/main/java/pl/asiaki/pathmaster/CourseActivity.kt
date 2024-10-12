@@ -100,7 +100,7 @@ class CourseActivity : ComponentActivity() {
             if (course.questions.isEmpty()) {
                 Center {
                     Text(
-                        text = "course has no questions!",
+                        text = "this course has no questions!",
                         fontSize = 5.em,
                     )
                 }

@@ -15,6 +15,11 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -33,6 +38,9 @@ fun Question(
         )
         HorizontalDivider()
     }
+
+    var selected by remember { mutableIntStateOf(-1) }
+
     LazyColumn(
         Modifier.padding(horizontal = 0.dp, vertical = 10.dp),
     ) {
@@ -43,9 +51,10 @@ fun Question(
                     .clip(RoundedCornerShape(50.dp))
             )
             RadioButton(
-                selected = false,
+                selected = selected == i,
                 onClick = {
                     onSelect(i)
+                    selected = i
                 }
             )
         }
@@ -53,7 +62,7 @@ fun Question(
 }
 
 class CourseActivity : ComponentActivity() {
-    private var answers: Array<Int> = arrayOf()
+    private var answers: IntArray = intArrayOf()
     private var currentQuestion: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -72,6 +81,8 @@ class CourseActivity : ComponentActivity() {
                 Text("course has no questions!")
                 return@setContent
             }
+
+            answers = IntArray(course.questions.size) { -1 }
 
             val onSelect: (Int) -> Unit = { index ->
                 answers[currentQuestion] = index

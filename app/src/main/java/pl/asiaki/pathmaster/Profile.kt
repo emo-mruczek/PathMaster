@@ -9,13 +9,15 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.Black
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 
 @Composable
-fun Profile(name: String = "Maciuś", lvl: Int = 21) {
+fun Profile(name: String, lvl: Int) {
     Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
             Column( horizontalAlignment = Alignment.CenterHorizontally) {
                 Text(
@@ -37,3 +39,11 @@ fun Profile(name: String = "Maciuś", lvl: Int = 21) {
     }
 }
 
+@Preview
+@Composable
+fun ProfilePreview() {
+    Profile(
+        name = "Maciuś",
+        lvl = 21,
+    )
+}

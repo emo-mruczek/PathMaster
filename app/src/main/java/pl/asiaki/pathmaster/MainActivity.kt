@@ -10,6 +10,10 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
+            Profile(
+        name = "Maciuś",
+        lvl = 21,
+    )
         }
     }
 }

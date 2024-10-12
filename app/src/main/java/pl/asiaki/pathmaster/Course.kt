@@ -1,7 +1,9 @@
 package pl.asiaki.pathmaster
 
+import android.content.Intent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
@@ -15,8 +17,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 
 enum class CourseLevel(val upperPointBound: UInt, val colour: Color) {
     BASIC(100u, Color.Blue),
@@ -36,6 +42,7 @@ enum class CourseLevel(val upperPointBound: UInt, val colour: Color) {
     }
 }
 
+@Serializable
 data class CourseData(
     val name: String,
     val description: String,
@@ -80,13 +87,20 @@ val COURSES = listOf(
 fun Course(
     course: CourseData,
 ) {
+    val context = LocalContext.current
+
     Column(
         Modifier
             .height(IntrinsicSize.Min)
             .border(
                 width = 5.dp,
                 color = Color.Black,
-            ),
+            )
+            .clickable {
+                val intent = Intent(context, CourseActivity::class.java)
+                intent.putExtra("course", Json.encodeToString(course))
+                context.startActivity(intent)
+            },
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Row(

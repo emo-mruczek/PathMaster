@@ -27,7 +27,8 @@ fun Profile(name: String, lvl: Int) {
     Column(
         Modifier.fillMaxWidth().
             padding(10.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.SpaceAround,
     ) {
         Row(
             Modifier.fillMaxWidth(),
@@ -81,8 +82,7 @@ fun Profile(name: String, lvl: Int) {
 @Composable
 fun CoursesList(courses: List<CourseData>) {
     LazyColumn(
-        Modifier.padding(10.dp),
-        verticalArrangement = Arrangement.SpaceAround
+        Modifier.padding(horizontal = 0.dp, vertical = 10.dp),
     ) {
         items(courses) { course ->
             Course(course)

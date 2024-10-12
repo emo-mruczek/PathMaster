@@ -5,7 +5,10 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -18,12 +21,26 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.em
 import kotlinx.serialization.json.Json
+
+@Composable
+fun Center(
+    content: @Composable ColumnScope.() -> Unit,
+) {
+    Column(
+        Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        content
+    )
+}
 
 @Composable
 fun Question(
@@ -71,12 +88,22 @@ class CourseActivity : ComponentActivity() {
             val intent = (context as CourseActivity).intent
             val courseJson = intent.getStringExtra("course")
             if (courseJson == null) {
-                Text("didn't receive course data1")
+                Center {
+                    Text(
+                        text = "didn't receive course data!",
+                        fontSize = 5.em,
+                    )
+                }
                 return@setContent
             }
             val course = Json.decodeFromString<CourseData>(courseJson)
             if (course.questions.isEmpty()) {
-                Text("course has no questions!")
+                Center {
+                    Text(
+                        text = "course has no questions!",
+                        fontSize = 5.em,
+                    )
+                }
                 return@setContent
             }
 

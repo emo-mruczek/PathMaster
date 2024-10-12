@@ -2,10 +2,8 @@ package pl.asiaki.pathmaster
 
 import android.content.Intent
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
@@ -22,22 +20,25 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.font.FontWeight.Companion.Bold
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import pl.asiaki.pathmaster.ui.theme.Black
+import pl.asiaki.pathmaster.ui.theme.Green
+import pl.asiaki.pathmaster.ui.theme.Orange
+import pl.asiaki.pathmaster.ui.theme.Purple40
 import pl.asiaki.pathmaster.ui.theme.Red
 import pl.asiaki.pathmaster.ui.theme.Salmon
 
 enum class CourseLevel(val upperPointBound: UInt, val colour: Color) {
-    BASIC(100u, Color.Blue),
-    EASY(500u, Color.Green),
-    MEDIUM(1500u, Color.Yellow),
-    HARD(5000u, Color.Red),
-    EXTREME(UInt.MAX_VALUE, Color.Magenta);
+    BASIC(100u, Purple40),
+    EASY(500u, Green),
+    MEDIUM(1500u, Orange),
+    HARD(5000u, Red),
+    EXTREME(UInt.MAX_VALUE, Black);
 
     companion object {
         fun level(points: UInt): CourseLevel {
@@ -184,14 +185,16 @@ fun Course(
                 fontSize = 25.sp,
                 color = Red
                 )
-            Row( Modifier.padding(2.dp).clip(RoundedCornerShape(15.dp))
-                .background(CourseLevel.level(course.points).colour),
+            Row(
+                Modifier.padding(2.dp).clip(RoundedCornerShape(15.dp)),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center
-                ) {
+            ) {
                 Text(
                     "${course.points} pkt.",
-                    fontSize = 15.sp
+                    fontSize = 15.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = CourseLevel.level(course.points).colour,
                 )
             }
         }

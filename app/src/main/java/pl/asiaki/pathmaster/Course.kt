@@ -47,7 +47,7 @@ data class CourseData(
     val name: String,
     val description: String,
     val points: UInt,
-    val questions: List<Question>,
+    val questions: List<QuestionData>,
 )
 
 val COURSES = listOf(

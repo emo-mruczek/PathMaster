@@ -27,9 +27,19 @@ import androidx.compose.ui.unit.em
 
 @Composable
 fun Profile(name: String, lvl: Int) {
-    Column(Modifier.fillMaxWidth().padding(10.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-        Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceEvenly) {
-            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+    Column(
+        Modifier.fillMaxWidth().
+            padding(10.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Row(
+            Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceEvenly
+        ) {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
                 Text(
                     text = name,
                     color = Black,
@@ -52,8 +62,16 @@ fun Profile(name: String, lvl: Int) {
                     .clip(RoundedCornerShape(200.dp))
             )
         }
-        Column(Modifier.fillMaxWidth().padding(top = 25.dp),horizontalAlignment = Alignment.CenterHorizontally) {
-            Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceEvenly) {
+        Column(
+            Modifier.fillMaxWidth()
+                .padding(top = 25.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Row(
+                Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceEvenly
+            ) {
                 Text(
                     text = "LATEST COURSES"
                 )
@@ -63,7 +81,19 @@ fun Profile(name: String, lvl: Int) {
                 )
 
             }
-                CoursesList(COURSES)
+            CoursesList(COURSES)
+        }
+    }
+}
+
+@Composable
+fun CoursesList(courses: List<CourseData>) {
+    LazyColumn(
+        Modifier.padding(10.dp),
+        verticalArrangement = Arrangement.SpaceAround
+    ) {
+        items(courses) { course ->
+            Course(course)
         }
     }
 }
@@ -76,13 +106,3 @@ fun ProfilePreview() {
         lvl = 21,
     )
 }
-
-@Composable
-fun CoursesList(courses: List<CourseData>) {
-    LazyColumn {
-        items(courses) { course ->
-            Course(course)
-        }
-    }
-}
-

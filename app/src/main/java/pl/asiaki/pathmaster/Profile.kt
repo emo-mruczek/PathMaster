@@ -53,15 +53,17 @@ fun Profile(name: String, lvl: Int) {
             )
         }
         Column(Modifier.fillMaxWidth().padding(top = 25.dp),horizontalAlignment = Alignment.CenterHorizontally) {
-            Text(
-                text = "LATEST COURSES"
-            )
-            //TODO: buttor
-            Text(
-                text = "More courses ->"
-            )
+            Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceEvenly) {
+                Text(
+                    text = "LATEST COURSES"
+                )
+                //TODO: buttor
+                Text(
+                    text = "More courses ->"
+                )
 
-            CoursesList();
+            }
+                CoursesList(COURSES)
         }
     }
 }

@@ -53,8 +53,8 @@ fun Question(
 }
 
 class CourseActivity : ComponentActivity() {
-    var answers: Array<Int> = arrayOf()
-    var currentQuestion: Int = 0
+    private var answers: Array<Int> = arrayOf()
+    private var currentQuestion: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
@@ -62,7 +62,16 @@ class CourseActivity : ComponentActivity() {
         setContent {
             val context = LocalContext.current
             val intent = (context as CourseActivity).intent
-            val course = Json.decodeFromString<CourseData>(intent.getStringExtra("course")!!)
+            val courseJson = intent.getStringExtra("course")
+            if (courseJson == null) {
+                Text("didn't receive course data1")
+                return@setContent
+            }
+            val course = Json.decodeFromString<CourseData>(courseJson)
+            if (course.questions.isEmpty()) {
+                Text("course has no questions!")
+                return@setContent
+            }
 
             val onSelect: (Int) -> Unit = { index ->
                 answers[currentQuestion] = index

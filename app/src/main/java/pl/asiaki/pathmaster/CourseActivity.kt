@@ -62,10 +62,7 @@ fun Center(
 fun Question(
     question: QuestionData,
     answer: Int,
-    questionIndex: Int,
-    questionCount: Int,
     onSelect: (Int) -> Unit,
-    onMove: (Int) -> Unit,
 ) {
     Column {
         Column {
@@ -97,36 +94,47 @@ fun Question(
             }
         }
 
-        Row {
-            Button(
-                onClick = {
-                    onMove(-1)
-                }
-            ) {
-                Text(
-                    text = "<<",
-                    fontSize = 5.em,
-                    color = Red,
-                )
-            }
+    }
+}
 
+@Composable
+fun QuestionPicker(
+    questionIndex: Int,
+    questionCount: Int,
+    onMove: (Int) -> Unit,
+) {
+    Row (
+        Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceEvenly
+    ) {
+        Button(
+            onClick = {
+                onMove(-1)
+            }
+        ) {
             Text(
-                text = "${questionIndex + 1} / $questionCount",
+                text = "<<",
                 fontSize = 5.em,
                 color = Red,
             )
+        }
 
-            Button(
-                onClick = {
-                    onMove(1)
-                }
-            ) {
-                Text(
-                    text = ">>",
-                    fontSize = 5.em,
-                    color = Red,
-                )
+        Text(
+            text = "${questionIndex + 1} / $questionCount",
+            fontSize = 5.em,
+            color = Red,
+        )
+
+        Button(
+            onClick = {
+                onMove(1)
             }
+        ) {
+            Text(
+                text = ">>",
+                fontSize = 5.em,
+                color = Red,
+            )
         }
     }
 }
@@ -175,15 +183,22 @@ class CourseActivity : ComponentActivity() {
                     currentQuestion += offset
                 }
             }
-            Column(Modifier.fillMaxSize().background(Background)) {
-                Header(course.name)
-                Question(
-                    course.questions[currentQuestion],
-                    answers[currentQuestion],
+            Column(
+                Modifier.fillMaxSize().background(Background),
+                verticalArrangement = Arrangement.SpaceBetween,
+            ) {
+                Column {
+                    Header(course.name)
+                    Question(
+                        course.questions[currentQuestion],
+                        answers[currentQuestion],
+                        onSelect,
+                    )
+                }
+                QuestionPicker(
                     currentQuestion,
                     course.questions.size,
-                    onSelect,
-                    onMove
+                    onMove,
                 )
             }
         }

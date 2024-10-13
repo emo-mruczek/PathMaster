@@ -4,14 +4,17 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -30,7 +33,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
@@ -169,15 +174,18 @@ class CourseActivity : ComponentActivity() {
                     currentQuestion += offset
                 }
             }
+            Column() {
+                Header(course.name)
 
-            Question(
-                course.questions[currentQuestion],
-                answers[currentQuestion],
-                currentQuestion,
-                course.questions.size,
-                onSelect,
-                onMove
-            )
+                Question(
+                    course.questions[currentQuestion],
+                    answers[currentQuestion],
+                    currentQuestion,
+                    course.questions.size,
+                    onSelect,
+                    onMove
+                )
+            }
         }
     }
 }
@@ -187,13 +195,32 @@ fun Header(name: String) {
     val brush = Brush.linearGradient(listOf(Orange, Pink))
     Row(Modifier.padding(top = 20.dp, bottom = 10.dp).fillMaxWidth().background(brush),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceEvenly ) {
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) { Box(Modifier.padding(15.dp)) {
         Text(
             text = name,
-            fontFamily =  robotoFamily,
+            fontFamily = robotoFamily,
             fontWeight = FontWeight.Medium,
             fontSize = 5.em,
             color = White
+        )
+    }
+        val image = painterResource(R.drawable.burger)
+        Image(
+            painter = image,
+            contentDescription = "burger",
+            contentScale = ContentScale.Crop,
+            modifier = Modifier.padding(15.dp)
+                .size(30.dp)
+        )
+    }
+    Box(Modifier.padding(10.dp)) {
+        Text(
+            text = "QUIZ",
+            fontFamily = robotoFamily,
+            fontWeight = FontWeight.Medium,
+            color = Red,
+            fontSize = 10.em
         )
     }
 }

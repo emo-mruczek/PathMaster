@@ -1,5 +1,6 @@
 package pl.asiaki.pathmaster
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -41,6 +42,7 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
+import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import pl.asiaki.pathmaster.ui.theme.Background
 import pl.asiaki.pathmaster.ui.theme.Black
@@ -130,15 +132,14 @@ fun QuestionPicker(
     questionCount: Int,
     allQuestionsAnswered: Boolean,
     onMove: (Int) -> Unit,
+    onFinish: () -> Unit,
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         if (allQuestionsAnswered) {
             Button(
-                onClick = {
-                    // TODO: submit question data to server
-                },
+                onClick = onFinish,
                 colors = ButtonColors(
                     contentColor = White,
                     containerColor = Red,
@@ -249,6 +250,21 @@ class CourseActivity : ComponentActivity() {
                     currentQuestion += offset
                 }
             }
+
+            val onFinish: () -> Unit = {
+                // TODO: submit question data to server
+                val finishedIntent = Intent(context, MainActivity::class.java)
+                val passedCourse = course.questions.withIndex()
+                    .all { q ->
+                        val question = q.value
+                        val answer = answers[q.index]
+                        question.correctAnswer == answer
+                    }
+                finishedIntent.putExtra("passed", passedCourse)
+                finishedIntent.putExtra("course", Json.encodeToString(course))
+                context.startActivity(finishedIntent)
+            }
+
             Column(
                 Modifier
                     .fillMaxSize()
@@ -268,6 +284,7 @@ class CourseActivity : ComponentActivity() {
                     course.questions.size,
                     answers.all { answer -> answer != -1 },
                     onMove,
+                    onFinish,
                 )
             }
         }

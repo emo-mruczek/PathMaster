@@ -8,5 +8,4 @@ data class CourseData(
     val description: String,
     val points: UInt,
     val questions: List<QuestionData>,
-    val finished: Boolean = false,
 )

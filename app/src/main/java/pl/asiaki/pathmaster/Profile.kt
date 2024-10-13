@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 
 @Composable
-fun Profile(name: String, lvl: Int) {
+fun Profile(user: UserData) {
     Column(
         Modifier.fillMaxWidth().
             padding(10.dp),
@@ -40,14 +40,14 @@ fun Profile(name: String, lvl: Int) {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = name,
+                    text = user.name,
                     color = Black,
                     fontSize = 7.5.em,
                     fontFamily = robotoFamily,
                     fontWeight = FontWeight.Bold
                 )
                 Text(
-                    text = "Level: $lvl",
+                    text = "Level: ${user.lvl}",
                     color = Black,
                     fontSize = 6.em
                 )
@@ -71,8 +71,7 @@ fun Profile(name: String, lvl: Int) {
         ) {
             Text(
                 text = "OSTATNIE KURSY",
-                color = Black,
-                fontSize = 6.5.em,
+                color = Black, fontSize = 6.5.em,
                 fontFamily = robotoFamily,
                 fontWeight = FontWeight.Light
             )
@@ -104,9 +103,6 @@ fun CoursesList(courses: List<CourseData>) {
 @Composable
 fun ProfilePreview() {
     Profile(
-        name = "Maciuś",
-        lvl = 21,
+       UserData (name = "Macius", surname = "Maciusiowy", coursesInProgress = COURSES, lvl = 21,  MsT = 2137)
     )
-}
-
-val VALUE = 2137u
+}  val VALUE = 2137u

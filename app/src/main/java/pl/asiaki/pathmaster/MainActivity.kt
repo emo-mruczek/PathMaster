@@ -19,8 +19,9 @@ class MainActivity : ComponentActivity() {
                 modifier = Modifier.fillMaxSize().background(Background)
             ) {
                 Profile(
-                    name = "Maciuś",
-                    lvl = 21,
+
+                    UserData (name = "Macius", surname = "Maciusiowy", coursesInProgress = COURSES, lvl = 21, MsT = 2137)
+
                 )
             }
         }

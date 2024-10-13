@@ -15,7 +15,7 @@ import retrofit2.http.Query
 
 interface ApiService {
     @GET("/generate_account")
-    suspend fun getGeneratedAccount(
+    suspend fun generateAccount(
         @Header("k") apiKey: String,
     ): Response<AccountResponse>
 
@@ -38,7 +38,7 @@ data class AccountResponse(val accountKey: String)
 
 data class BalanceResponse(val balance: Int)
 
-data class AwardTokensResponse(val succeeded: Boolean, val currBalance: Int.Companion = Int) // ??? XD why
+data class AwardTokensResponse(val succeeded: Boolean, val currBalance: Int) // ??? XD why
 
 object RetrofitInstance {
     val api: ApiService by lazy {
@@ -76,9 +76,7 @@ class AccountViewModel : ViewModel() {
                     _balance.value = response.body()?.balance
                 }
             } catch (e: Exception) {
-
                 Log.d("API", "checkBalance request failed!")
-
             }
         }
     }
@@ -89,13 +87,11 @@ class AccountViewModel : ViewModel() {
                 val response = RetrofitInstance.api.awardTokens(apiKey, address, amount)
                 if (response.isSuccessful) {
                     response.body()?.let {
-                        _tokenAwarded.value = Pair(it.succeeded, it.curr_balance)
+                        _tokenAwarded.value = Pair(it.succeeded, it.currBalance)
                     }
                 }
             } catch (e: Exception) {
-
                 Log.d("API", "awardTokens request failed!")
-
             }
         }
     }

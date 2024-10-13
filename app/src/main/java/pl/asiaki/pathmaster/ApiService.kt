@@ -6,6 +6,8 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import okhttp3.OkHttpClient
+import okhttp3.Request
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -40,17 +42,39 @@ data class BalanceResponse(val balance: Int)
 
 data class AwardTokensResponse(val succeeded: Boolean, val currBalance: Int) // ??? XD why
 
-object RetrofitInstance {
+fun startApi() {
+
+    var client = OkHttpClient.Builder()
+
+    fun run(url: String = "http://127.0.0.1:8545/") {
+        var request = Request.Builder()
+            .url(url)
+            .build()
+    }
+
+    var Retrofit = Retrofit.Builder()
+        .baseUrl("https://api.github.com/")
+        .addConverterFactory(GsonConverterFactory.create())
+        .client(client.build())
+        .build();
+
+    
+
+}
+
+/*object RetrofitInstance {
     val api: ApiService by lazy {
         Retrofit.Builder()
-            .baseUrl("http://10.0.2.2:5000")
+            .baseUrl("http://127.0.0.1:5000")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(ApiService::class.java)
     }
-}
+}*/
 
-class AccountViewModel : ViewModel() {
+
+
+/*class AccountViewModel : ViewModel() {
 
     private val _balance = MutableStateFlow<Int?>(null)
     val balance: StateFlow<Int?> = _balance
@@ -95,4 +119,4 @@ class AccountViewModel : ViewModel() {
             }
         }
     }
-}
+}*/

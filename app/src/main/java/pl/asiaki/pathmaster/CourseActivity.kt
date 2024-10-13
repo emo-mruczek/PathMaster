@@ -20,6 +20,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
@@ -137,12 +138,17 @@ fun QuestionPicker(
         Button(
             onClick = {
                 onMove(-1)
-            }
+            },
+            colors = ButtonColors(
+                contentColor = White,
+                containerColor = Red,
+                disabledContentColor = Color.Gray,
+                disabledContainerColor = Color.Black,
+            )
         ) {
             Text(
                 text = "<<",
                 fontSize = 5.em,
-                color = White,
             )
         }
 
@@ -157,12 +163,17 @@ fun QuestionPicker(
         Button(
             onClick = {
                 onMove(1)
-            }
+            },
+            colors = ButtonColors(
+                contentColor = White,
+                containerColor = Red,
+                disabledContentColor = Color.Gray,
+                disabledContainerColor = Color.Black,
+            )
         ) {
             Text(
                 text = ">>",
                 fontSize = 5.em,
-                color = White,
             )
         }
     }

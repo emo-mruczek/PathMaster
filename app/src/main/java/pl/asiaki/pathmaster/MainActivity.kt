@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.ui.Modifier
 import pl.asiaki.pathmaster.ui.theme.Background
+import pl.asiaki.pathmaster.ui.theme.Pink
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,7 +17,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             Box(
-                modifier = Modifier.fillMaxSize().background(Background)
+                Modifier.fillMaxSize().background(Pink)
             ) {
                 Profile(
 

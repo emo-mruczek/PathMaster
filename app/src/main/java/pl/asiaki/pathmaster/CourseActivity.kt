@@ -40,6 +40,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import kotlinx.serialization.json.Json
+import pl.asiaki.pathmaster.ui.theme.Background
 import pl.asiaki.pathmaster.ui.theme.Orange
 import pl.asiaki.pathmaster.ui.theme.Pink
 import pl.asiaki.pathmaster.ui.theme.Red
@@ -174,9 +175,8 @@ class CourseActivity : ComponentActivity() {
                     currentQuestion += offset
                 }
             }
-            Column() {
+            Column(Modifier.fillMaxSize().background(Background)) {
                 Header(course.name)
-
                 Question(
                     course.questions[currentQuestion],
                     answers[currentQuestion],

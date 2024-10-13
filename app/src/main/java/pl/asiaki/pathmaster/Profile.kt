@@ -1,9 +1,11 @@
 package pl.asiaki.pathmaster
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -22,12 +24,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
+import pl.asiaki.pathmaster.ui.theme.Background
+import pl.asiaki.pathmaster.ui.theme.Pink
 
 @Composable
 fun Profile(user: UserData) {
     Column(
         Modifier.fillMaxWidth().
-            padding(10.dp),
+            padding(10.dp).background(Background),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceAround,
     ) {

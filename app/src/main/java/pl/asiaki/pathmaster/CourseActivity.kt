@@ -64,10 +64,7 @@ fun Question(
         }
 
         var selected by remember { mutableIntStateOf(-1) }
-
-        fun reselect() {
-            selected = answer
-        }
+        selected = answer
 
         LazyColumn(
             Modifier.padding(horizontal = 0.dp, vertical = 10.dp),
@@ -92,7 +89,6 @@ fun Question(
             Button(
                 onClick = {
                     onMove(-1)
-                    reselect()
                 }
             ) {
                 Text(
@@ -111,7 +107,6 @@ fun Question(
             Button(
                 onClick = {
                     onMove(1)
-                    reselect()
                 }
             ) {
                 Text(

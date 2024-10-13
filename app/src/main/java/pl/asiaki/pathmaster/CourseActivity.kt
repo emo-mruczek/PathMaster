@@ -160,7 +160,13 @@ class CourseActivity : ComponentActivity() {
             }
 
             val onMove: (Int) -> Unit = { offset ->
-                currentQuestion += offset
+                if (offset >= 0) {
+                    currentQuestion = (currentQuestion + offset) % answers.size
+                } else if (currentQuestion + offset < 0) {
+                    currentQuestion = answers.size + offset - currentQuestion
+                } else {
+                    currentQuestion += offset
+                }
             }
 
             Question(

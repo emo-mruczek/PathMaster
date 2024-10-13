@@ -37,14 +37,19 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import kotlinx.serialization.json.Json
 import pl.asiaki.pathmaster.ui.theme.Background
+import pl.asiaki.pathmaster.ui.theme.Black
+import pl.asiaki.pathmaster.ui.theme.Green
 import pl.asiaki.pathmaster.ui.theme.Orange
 import pl.asiaki.pathmaster.ui.theme.Pink
 import pl.asiaki.pathmaster.ui.theme.Red
+import pl.asiaki.pathmaster.ui.theme.Salmon
 import pl.asiaki.pathmaster.ui.theme.White
 
 @Composable
@@ -69,9 +74,12 @@ fun Question(
         Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Column {
+        Column(Modifier.padding(7.dp)) {
             Text(
-                question.question
+                text = question.question,
+                fontFamily = robotoFamily,
+                fontWeight = FontWeight.Bold,
+                fontSize = 7.em
             )
             HorizontalDivider()
         }
@@ -80,36 +88,39 @@ fun Question(
         selected = answer
 
         LazyColumn(
-            Modifier.padding(horizontal = 0.dp, vertical = 10.dp),
+            Modifier.padding(horizontal = 5.dp, vertical = 10.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.SpaceEvenly,
         ) {
+            val brushA = Brush.linearGradient(listOf(Orange, Pink))
+            val brushB = Brush.linearGradient(listOf(Salmon, Salmon))
             itemsIndexed(question.answers) { i, answer ->
-                Box(
+                Column(
                     modifier = Modifier
-                        .padding(5.dp)
+                        .padding(7.dp)
                         .clip(RoundedCornerShape(15.dp))
                         .background(
                             if (selected == i) {
-                                Color.Green
+                               brushA
                             } else {
-                                Color.Red
+                               brushB
                             }
                         )
                         .clickable {
                             selected = i
                             onSelect(selected)
-                        }
+                        }.fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(
                         text = answer,
                         fontSize = 6.em,
-                        modifier = Modifier.padding(5.dp)
+                        modifier = Modifier.padding(5.dp),
+                        color = Black
                     )
                 }
             }
         }
-
     }
 }
 
@@ -131,7 +142,7 @@ fun QuestionPicker(
             Text(
                 text = "<<",
                 fontSize = 5.em,
-                color = Red,
+                color = White,
             )
         }
 
@@ -139,6 +150,8 @@ fun QuestionPicker(
             text = "${questionIndex + 1} / $questionCount",
             fontSize = 5.em,
             color = Red,
+            fontFamily = robotoFamily,
+            fontStyle = FontStyle.Normal
         )
 
         Button(
@@ -149,7 +162,7 @@ fun QuestionPicker(
             Text(
                 text = ">>",
                 fontSize = 5.em,
-                color = Red,
+                color = White,
             )
         }
     }
@@ -168,6 +181,8 @@ class CourseActivity : ComponentActivity() {
                     Text(
                         text = "didn't receive course data!",
                         fontSize = 5.em,
+                        fontFamily = robotoFamily,
+                        fontWeight = FontWeight.Normal
                     )
                 }
                 return@setContent
@@ -178,6 +193,8 @@ class CourseActivity : ComponentActivity() {
                     Text(
                         text = "this course has no questions!",
                         fontSize = 5.em,
+                        fontFamily = robotoFamily,
+                        fontWeight = FontWeight.Normal
                     )
                 }
                 return@setContent

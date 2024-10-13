@@ -129,52 +129,75 @@ fun Question(
 fun QuestionPicker(
     questionIndex: Int,
     questionCount: Int,
+    allQuestionsAnswered: Boolean,
     onMove: (Int) -> Unit,
 ) {
-    Row (
-        Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceEvenly
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Button(
-            onClick = {
-                onMove(-1)
-            },
-            colors = ButtonColors(
-                contentColor = White,
-                containerColor = Red,
-                disabledContentColor = Color.Gray,
-                disabledContainerColor = Color.Black,
-            )
-        ) {
-            Text(
-                text = "<<",
-                fontSize = 5.em,
-            )
+        if (allQuestionsAnswered) {
+            Button(
+                onClick = {
+                    // TODO: submit question data to server
+                },
+                colors = ButtonColors(
+                    contentColor = White,
+                    containerColor = Red,
+                    disabledContentColor = Color.Gray,
+                    disabledContainerColor = Color.Black,
+                )
+            ) {
+                Text(
+                    text = "Zakończ quiz",
+                    fontSize = 5.em,
+                )
+            }
         }
-
-        Text(
-            text = "${questionIndex + 1} / $questionCount",
-            fontSize = 5.em,
-            color = Red,
-            fontFamily = robotoFamily,
-            fontStyle = FontStyle.Normal
-        )
-
-        Button(
-            onClick = {
-                onMove(1)
-            },
-            colors = ButtonColors(
-                contentColor = White,
-                containerColor = Red,
-                disabledContentColor = Color.Gray,
-                disabledContainerColor = Color.Black,
-            )
+        Row (
+            Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly
         ) {
+            Button(
+                onClick = {
+                    onMove(-1)
+                },
+                colors = ButtonColors(
+                    contentColor = White,
+                    containerColor = Red,
+                    disabledContentColor = Color.Gray,
+                    disabledContainerColor = Color.Black,
+                )
+            ) {
+                Text(
+                    text = "<<",
+                    fontSize = 5.em,
+                )
+            }
+
             Text(
-                text = ">>",
+                text = "${questionIndex + 1} / $questionCount",
                 fontSize = 5.em,
+                color = Red,
+                fontFamily = robotoFamily,
+                fontStyle = FontStyle.Normal
             )
+
+            Button(
+                onClick = {
+                    onMove(1)
+                },
+                colors = ButtonColors(
+                    contentColor = White,
+                    containerColor = Red,
+                    disabledContentColor = Color.Gray,
+                    disabledContainerColor = Color.Black,
+                )
+            ) {
+                Text(
+                    text = ">>",
+                    fontSize = 5.em,
+                )
+            }
         }
     }
 }
@@ -244,6 +267,7 @@ class CourseActivity : ComponentActivity() {
                 QuestionPicker(
                     currentQuestion,
                     course.questions.size,
+                    answers.all { answer -> answer != -1 },
                     onMove,
                 )
             }

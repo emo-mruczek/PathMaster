@@ -52,14 +52,6 @@ enum class CourseLevel(val upperPointBound: UInt, val colour: Color) {
     }
 }
 
-@Serializable
-data class CourseData(
-    val name: String,
-    val description: String,
-    val points: UInt,
-    val questions: List<QuestionData>
-)
-
 val COURSES = listOf(
     CourseData(
         name = "Podstawy Rusta",

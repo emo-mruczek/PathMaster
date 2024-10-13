@@ -91,7 +91,9 @@ fun CoursesList(courses: List<CourseData>) {
         Modifier.padding(horizontal = 0.dp, vertical = 10.dp),
     ) {
         items(courses) { course ->
-            Course(course)
+            if (!course.finished) {
+                Course(course)
+            }
         }
     }
 }

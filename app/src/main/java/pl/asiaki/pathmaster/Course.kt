@@ -60,7 +60,7 @@ val COURSES = listOf(
             QuestionData(
                 question = "Co to jest Rust?",
                 answers = listOf("To taki język programowania", "Nie wiem", "To system operacyjny"),
-                correctAnswer = 2,
+                correctAnswer = 0,
             ),
             QuestionData(
                 question = "Który fragment kodu poprawnie wypisze tekst?",

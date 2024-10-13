@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -64,7 +65,10 @@ fun Question(
     answer: Int,
     onSelect: (Int) -> Unit,
 ) {
-    Column {
+    Column(
+        Modifier.fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
         Column {
             Text(
                 question.question
@@ -77,20 +81,32 @@ fun Question(
 
         LazyColumn(
             Modifier.padding(horizontal = 0.dp, vertical = 10.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.SpaceEvenly,
         ) {
             itemsIndexed(question.answers) { i, answer ->
-                Text(
-                    answer,
-                    Modifier.background(Color.Red)
-                        .clip(RoundedCornerShape(50.dp))
-                )
-                RadioButton(
-                    selected = selected == i,
-                    onClick = {
-                        selected = i
-                        onSelect(selected)
-                    }
-                )
+                Box(
+                    modifier = Modifier
+                        .padding(5.dp)
+                        .clip(RoundedCornerShape(15.dp))
+                        .background(
+                            if (selected == i) {
+                                Color.Green
+                            } else {
+                                Color.Red
+                            }
+                        )
+                        .clickable {
+                            selected = i
+                            onSelect(selected)
+                        }
+                ) {
+                    Text(
+                        text = answer,
+                        fontSize = 6.em,
+                        modifier = Modifier.padding(5.dp)
+                    )
+                }
             }
         }
 
@@ -184,7 +200,9 @@ class CourseActivity : ComponentActivity() {
                 }
             }
             Column(
-                Modifier.fillMaxSize().background(Background),
+                Modifier
+                    .fillMaxSize()
+                    .background(Background),
                 verticalArrangement = Arrangement.SpaceBetween,
             ) {
                 Column {
@@ -208,7 +226,11 @@ class CourseActivity : ComponentActivity() {
 @Composable
 fun Header(name: String) {
     val brush = Brush.linearGradient(listOf(Orange, Pink))
-    Row(Modifier.padding(top = 20.dp, bottom = 10.dp).fillMaxWidth().background(brush),
+    Row(
+        Modifier
+            .padding(top = 20.dp, bottom = 10.dp)
+            .fillMaxWidth()
+            .background(brush),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) { Box(Modifier.padding(15.dp)) {
@@ -225,7 +247,8 @@ fun Header(name: String) {
             painter = image,
             contentDescription = "burger",
             contentScale = ContentScale.Crop,
-            modifier = Modifier.padding(15.dp)
+            modifier = Modifier
+                .padding(15.dp)
                 .size(30.dp)
         )
     }

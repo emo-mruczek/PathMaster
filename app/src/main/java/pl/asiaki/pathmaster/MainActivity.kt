@@ -20,9 +20,13 @@ class MainActivity : ComponentActivity() {
                 Modifier.fillMaxSize().background(Pink)
             ) {
                 Profile(
-
-                    UserData (name = "Macius", surname = "Maciusiowy", coursesInProgress = COURSES, lvl = 21, MsT = 2137)
-
+                    UserData(
+                        name = "Macius",
+                        surname = "Maciusiowy",
+                        coursesInProgress = COURSES,
+                        lvl = 21,
+                        MsT = 2137,
+                    )
                 )
             }
         }

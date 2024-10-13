@@ -8,5 +8,5 @@ data class UserData(
     val surname: String,
     val coursesInProgress: List<CourseData>,
     val lvl: Int,
-    val MsT: Int
+    val MsT: Int,
 )

@@ -26,9 +26,11 @@ import pl.asiaki.pathmaster.ui.theme.White
 
 @Composable
 fun WalletComposable(amount: UInt) {
-    val brush = Brush.linearGradient(listOf(Orange, Pink))
-    Column(Modifier.clip(RoundedCornerShape(20.dp)).background(brush).padding(5.dp)) {
-
+    Column(
+        Modifier.clip(RoundedCornerShape(20.dp))
+            .background(Brush.linearGradient(listOf(Orange, Pink)))
+            .padding(5.dp)
+    ) {
         Row(
             Modifier.padding(5.dp),
             verticalAlignment = Alignment.CenterVertically,
@@ -39,7 +41,7 @@ fun WalletComposable(amount: UInt) {
                 color = White,
                 fontFamily = robotoFamily,
                 fontWeight = FontWeight.Medium,
-                fontSize = 30.sp
+                fontSize = 30.sp,
             )
             //TODO: buttor
             /*Text(
@@ -51,17 +53,16 @@ fun WalletComposable(amount: UInt) {
             )*/
         }
         Row(
-            Modifier.padding(10.dp).fillMaxWidth(),
+            Modifier.padding(10.dp)
+                .fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceEvenly
+            horizontalArrangement = Arrangement.SpaceEvenly,
         ) {
-            val image = painterResource(R.drawable.hat_white)
             Image(
-                painter = image,
+                painter = painterResource(R.drawable.hat_white),
                 contentDescription = "MsT icon",
                 modifier = Modifier.padding(10.dp)
-                    .size(100.dp)
-
+                    .size(100.dp),
             )
             //TODO: buttor
             Text(
@@ -69,14 +70,14 @@ fun WalletComposable(amount: UInt) {
                 color = White,
                 fontFamily = robotoFamily,
                 fontWeight = FontWeight.Bold,
-                fontSize = 45.sp
+                fontSize = 45.sp,
             )
             Text(
                 text = "MsT",
                 color = White,
                 fontSize = 25.sp,
                 fontFamily = robotoFamily,
-                fontWeight = FontWeight.Normal
+                fontWeight = FontWeight.Normal,
             )
         }
     }

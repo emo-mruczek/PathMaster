@@ -5,7 +5,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -25,59 +24,59 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import pl.asiaki.pathmaster.ui.theme.Background
-import pl.asiaki.pathmaster.ui.theme.Pink
 
 @Composable
 fun Profile(user: UserData) {
     Column(
-        Modifier.fillMaxWidth().
-            padding(10.dp).background(Background),
+        Modifier.fillMaxWidth()
+            .padding(10.dp)
+            .background(Background),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceAround,
     ) {
         Row(
             Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceEvenly
+            horizontalArrangement = Arrangement.SpaceEvenly,
         ) {
             Column(
-                horizontalAlignment = Alignment.CenterHorizontally
+                horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 Text(
                     text = user.name,
                     color = Black,
                     fontSize = 7.5.em,
                     fontFamily = robotoFamily,
-                    fontWeight = FontWeight.Bold
+                    fontWeight = FontWeight.Bold,
                 )
                 Text(
                     text = "Level: ${user.lvl}",
                     color = Black,
-                    fontSize = 6.em
+                    fontSize = 6.em,
                 )
             }
-            val image = painterResource(R.drawable.pfp_new)
             Image(
-                painter = image,
+                painter = painterResource(R.drawable.pfp_new),
                 contentDescription = "avatar",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .size(200.dp)
                     .padding(20.dp)
-                    .clip(RoundedCornerShape(200.dp))
+                    .clip(RoundedCornerShape(200.dp)),
             )
         }
         WalletComposable(VALUE)
         Row(
-            Modifier.padding(top = 20.dp, bottom = 10.dp).fillMaxWidth(),
+            Modifier.padding(top = 20.dp, bottom = 10.dp)
+                .fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceEvenly
+            horizontalArrangement = Arrangement.SpaceEvenly,
         ) {
             Text(
                 text = "TWOJE KURSY",
                 color = Black, fontSize = 6.5.em,
                 fontFamily = robotoFamily,
-                fontWeight = FontWeight.Light
+                fontWeight = FontWeight.Light,
             )
             //TODO: buttor
         }
@@ -102,6 +101,13 @@ fun CoursesList(courses: List<CourseData>) {
 @Composable
 fun ProfilePreview() {
     Profile(
-       UserData (name = "Macius", surname = "Maciusiowy", coursesInProgress = COURSES, lvl = 21,  MsT = 2137)
+       UserData(
+           name = "Macius",
+           surname = "Maciusiowy",
+           coursesInProgress = COURSES,
+           lvl = 21,
+           MsT = 2137,
+       )
     )
-}  val VALUE = 2137u
+}
+val VALUE = 2137u

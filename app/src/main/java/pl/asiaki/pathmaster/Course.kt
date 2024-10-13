@@ -24,7 +24,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
-import kotlinx.serialization.Serializable
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import pl.asiaki.pathmaster.ui.theme.Black
@@ -161,7 +160,9 @@ fun Course(
                 val intent = Intent(context, CourseActivity::class.java)
                 intent.putExtra("course", Json.encodeToString(course))
                 context.startActivity(intent)
-            }.clip(RoundedCornerShape(20.dp)).background(Salmon),
+            }
+            .clip(RoundedCornerShape(20.dp))
+            .background(Salmon),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Row(
@@ -169,18 +170,20 @@ fun Course(
                 .padding(10.dp)
                 .fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
-           horizontalArrangement = Arrangement.SpaceBetween,
+            horizontalArrangement = Arrangement.SpaceBetween,
         ) {
-            Text(course.name,
+            Text(
+                course.name,
                 fontFamily = robotoFamily,
                 fontWeight = FontWeight.Medium,
                 fontSize = 25.sp,
-                color = Red
-                )
+                color = Red,
+            )
             Row(
-                Modifier.padding(3.dp).clip(RoundedCornerShape(15.dp)),
+                Modifier.padding(3.dp)
+                    .clip(RoundedCornerShape(15.dp)),
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center
+                horizontalArrangement = Arrangement.Center,
             ) {
                 Text(
                     "${course.points} pkt.",

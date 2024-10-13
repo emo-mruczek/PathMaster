@@ -22,7 +22,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -38,7 +37,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -46,7 +44,6 @@ import androidx.compose.ui.unit.em
 import kotlinx.serialization.json.Json
 import pl.asiaki.pathmaster.ui.theme.Background
 import pl.asiaki.pathmaster.ui.theme.Black
-import pl.asiaki.pathmaster.ui.theme.Green
 import pl.asiaki.pathmaster.ui.theme.Orange
 import pl.asiaki.pathmaster.ui.theme.Pink
 import pl.asiaki.pathmaster.ui.theme.Red
@@ -61,7 +58,7 @@ fun Center(
         Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
-        content
+        content,
     )
 }
 
@@ -73,15 +70,18 @@ fun Question(
 ) {
     Column(
         Modifier.fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Column(Modifier.padding(7.dp)) {
+        Column(
+            Modifier.padding(7.dp)
+        ) {
             Text(
                 text = question.question,
                 fontFamily = robotoFamily,
                 fontWeight = FontWeight.Bold,
-                fontSize = 7.em
+                fontSize = 7.em,
             )
+
             HorizontalDivider()
         }
 
@@ -93,8 +93,6 @@ fun Question(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.SpaceEvenly,
         ) {
-            val brushA = Brush.linearGradient(listOf(Orange, Pink))
-            val brushB = Brush.linearGradient(listOf(Salmon, Salmon))
             itemsIndexed(question.answers) { i, answer ->
                 Column(
                     modifier = Modifier
@@ -102,22 +100,23 @@ fun Question(
                         .clip(RoundedCornerShape(15.dp))
                         .background(
                             if (selected == i) {
-                               brushA
+                               Brush.linearGradient(listOf(Orange, Pink))
                             } else {
-                               brushB
+                               Brush.linearGradient(listOf(Salmon, Salmon))
                             }
                         )
                         .clickable {
                             selected = i
                             onSelect(selected)
-                        }.fillMaxWidth(),
-                    horizontalAlignment = Alignment.CenterHorizontally
+                        }
+                        .fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     Text(
                         text = answer,
                         fontSize = 6.em,
                         modifier = Modifier.padding(5.dp),
-                        color = Black
+                        color = Black,
                     )
                 }
             }
@@ -155,7 +154,7 @@ fun QuestionPicker(
         }
         Row (
             Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceEvenly
+            horizontalArrangement = Arrangement.SpaceEvenly,
         ) {
             Button(
                 onClick = {
@@ -179,7 +178,7 @@ fun QuestionPicker(
                 fontSize = 5.em,
                 color = Red,
                 fontFamily = robotoFamily,
-                fontStyle = FontStyle.Normal
+                fontStyle = FontStyle.Normal,
             )
 
             Button(
@@ -216,7 +215,7 @@ class CourseActivity : ComponentActivity() {
                         text = "didn't receive course data!",
                         fontSize = 5.em,
                         fontFamily = robotoFamily,
-                        fontWeight = FontWeight.Normal
+                        fontWeight = FontWeight.Normal,
                     )
                 }
                 return@setContent
@@ -228,7 +227,7 @@ class CourseActivity : ComponentActivity() {
                         text = "this course has no questions!",
                         fontSize = 5.em,
                         fontFamily = robotoFamily,
-                        fontWeight = FontWeight.Normal
+                        fontWeight = FontWeight.Normal,
                     )
                 }
                 return@setContent
@@ -277,40 +276,43 @@ class CourseActivity : ComponentActivity() {
 
 @Composable
 fun Header(name: String) {
-    val brush = Brush.linearGradient(listOf(Orange, Pink))
     Row(
         Modifier
             .padding(top = 20.dp, bottom = 10.dp)
             .fillMaxWidth()
-            .background(brush),
+            .background(Brush.linearGradient(listOf(Orange, Pink))),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceBetween
-    ) { Box(Modifier.padding(15.dp)) {
-        Text(
-            text = name,
-            fontFamily = robotoFamily,
-            fontWeight = FontWeight.Medium,
-            fontSize = 5.em,
-            color = White
-        )
-    }
-        val image = painterResource(R.drawable.burger)
+        horizontalArrangement = Arrangement.SpaceBetween,
+    ) {
+        Box(
+            Modifier.padding(15.dp)
+        ) {
+            Text(
+                text = name,
+                fontFamily = robotoFamily,
+                fontWeight = FontWeight.Medium,
+                fontSize = 5.em,
+                color = White,
+            )
+        }
         Image(
-            painter = image,
+            painter = painterResource(R.drawable.burger),
             contentDescription = "burger",
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 .padding(15.dp)
-                .size(30.dp)
+                .size(30.dp),
         )
     }
-    Box(Modifier.padding(10.dp)) {
+    Box(
+        Modifier.padding(10.dp)
+    ) {
         Text(
             text = "QUIZ",
             fontFamily = robotoFamily,
             fontWeight = FontWeight.Medium,
             color = Red,
-            fontSize = 10.em
+            fontSize = 10.em,
         )
     }
 }

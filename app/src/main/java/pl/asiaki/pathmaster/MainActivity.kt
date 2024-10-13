@@ -34,10 +34,6 @@ class MainActivity : ComponentActivity() {
                     courses.remove(course)
                 }
             }
-
-            Box(
-                Modifier.fillMaxSize().background(Pink)
-            ) {
                 Profile(
                     UserData(
                         name = "Macius",
@@ -48,7 +44,7 @@ class MainActivity : ComponentActivity() {
                     ),
                     courses
                 )
-            }
+
         }
     }
 }

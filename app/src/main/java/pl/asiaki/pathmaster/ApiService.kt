@@ -1,6 +1,6 @@
 package pl.asiaki.pathmaster
 
-import android.util.Log
+/*import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -11,9 +11,9 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Header
-import retrofit2.http.Query
+import retrofit2.http.Query*/
 
-interface ApiService {
+/*interface ApiService {
     @GET("/generate_account")
     suspend fun generateAccount(
         @Header("k") apiKey: String,
@@ -95,4 +95,4 @@ class AccountViewModel : ViewModel() {
             }
         }
     }
-}
+}*/

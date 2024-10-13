@@ -4,21 +4,27 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.collection.MutableIntList
+import androidx.collection.mutableIntListOf
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collection.mutableVectorOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -29,6 +35,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import kotlinx.serialization.json.Json
+import pl.asiaki.pathmaster.ui.theme.Red
 
 @Composable
 fun Center(
@@ -45,41 +52,71 @@ fun Center(
 @Composable
 fun Question(
     question: QuestionData,
+    questionIndex: Int,
+    questionCount: Int,
     onSelect: (Int) -> Unit,
+    onMove: (Int) -> Unit,
 ) {
     Column {
-        Text(
-            question.question
-        )
-        HorizontalDivider()
-    }
-
-    var selected by remember { mutableIntStateOf(-1) }
-
-    LazyColumn(
-        Modifier.padding(horizontal = 0.dp, vertical = 10.dp),
-    ) {
-        itemsIndexed(question.answers) { i, answer ->
+        Column {
             Text(
-                answer,
-                Modifier.background(Color.Red)
-                    .clip(RoundedCornerShape(50.dp))
+                question.question
             )
-            RadioButton(
-                selected = selected == i,
-                onClick = {
-                    onSelect(i)
-                    selected = i
-                }
+            HorizontalDivider()
+        }
+
+        var selected by remember { mutableIntStateOf(-1) }
+
+        LazyColumn(
+            Modifier.padding(horizontal = 0.dp, vertical = 10.dp),
+        ) {
+            itemsIndexed(question.answers) { i, answer ->
+                Text(
+                    answer,
+                    Modifier.background(Color.Red)
+                        .clip(RoundedCornerShape(50.dp))
+                )
+                RadioButton(
+                    selected = selected == i,
+                    onClick = {
+                        onSelect(i)
+                        selected = i
+                    }
+                )
+            }
+        }
+
+        Row {
+            Button(
+                onClick = { onMove(-1) }
+            ) {
+                Text(
+                    text = "<<",
+                    fontSize = 5.em,
+                    color = Red,
+                )
+            }
+
+            Text(
+                text = "${questionIndex + 1} / $questionCount",
+                fontSize = 5.em,
+                color = Red,
             )
+
+            Button(
+                onClick = { onMove(1) }
+            ) {
+                Text(
+                    text = ">>",
+                    fontSize = 5.em,
+                    color = Red,
+                )
+            }
         }
     }
 }
 
 class CourseActivity : ComponentActivity() {
-    private var answers: IntArray = intArrayOf()
-    private var currentQuestion: Int = 0
-
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
@@ -107,13 +144,24 @@ class CourseActivity : ComponentActivity() {
                 return@setContent
             }
 
-            answers = IntArray(course.questions.size) { -1 }
+            val answers = remember { mutableStateListOf(*Array(course.questions.size) { -1 }) }
+            var currentQuestion by remember { mutableIntStateOf(0) }
 
             val onSelect: (Int) -> Unit = { index ->
                 answers[currentQuestion] = index
             }
 
-            Question(course.questions[currentQuestion], onSelect)
+            val onMove: (Int) -> Unit = { offset ->
+                currentQuestion += offset
+            }
+
+            Question(
+                course.questions[currentQuestion],
+                currentQuestion,
+                course.questions.size,
+                onSelect,
+                onMove
+            )
         }
     }
 }

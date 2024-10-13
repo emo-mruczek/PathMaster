@@ -70,19 +70,12 @@ fun Profile(user: UserData) {
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
             Text(
-                text = "OSTATNIE KURSY",
+                text = "TWOJE KURSY",
                 color = Black, fontSize = 6.5.em,
                 fontFamily = robotoFamily,
                 fontWeight = FontWeight.Light
             )
             //TODO: buttor
-            Text(
-                text = "Więcej ->",
-                color = Black,
-                fontSize = 3.5.em,
-                fontFamily = robotoFamily,
-                fontWeight = FontWeight.Bold
-            )
         }
         CoursesList(COURSES)
     }

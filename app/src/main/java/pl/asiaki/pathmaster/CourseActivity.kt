@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -27,12 +28,17 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import kotlinx.serialization.json.Json
+import pl.asiaki.pathmaster.ui.theme.Orange
+import pl.asiaki.pathmaster.ui.theme.Pink
 import pl.asiaki.pathmaster.ui.theme.Red
+import pl.asiaki.pathmaster.ui.theme.White
 
 @Composable
 fun Center(
@@ -173,5 +179,21 @@ class CourseActivity : ComponentActivity() {
                 onMove
             )
         }
+    }
+}
+
+@Composable
+fun Header(name: String) {
+    val brush = Brush.linearGradient(listOf(Orange, Pink))
+    Row(Modifier.padding(top = 20.dp, bottom = 10.dp).fillMaxWidth().background(brush),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceEvenly ) {
+        Text(
+            text = name,
+            fontFamily =  robotoFamily,
+            fontWeight = FontWeight.Medium,
+            fontSize = 5.em,
+            color = White
+        )
     }
 }

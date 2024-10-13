@@ -4,8 +4,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.collection.MutableIntList
-import androidx.collection.mutableIntListOf
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -21,7 +19,6 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collection.mutableVectorOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateListOf
@@ -52,6 +49,7 @@ fun Center(
 @Composable
 fun Question(
     question: QuestionData,
+    answer: Int,
     questionIndex: Int,
     questionCount: Int,
     onSelect: (Int) -> Unit,
@@ -67,6 +65,10 @@ fun Question(
 
         var selected by remember { mutableIntStateOf(-1) }
 
+        fun reselect() {
+            selected = answer
+        }
+
         LazyColumn(
             Modifier.padding(horizontal = 0.dp, vertical = 10.dp),
         ) {
@@ -79,8 +81,8 @@ fun Question(
                 RadioButton(
                     selected = selected == i,
                     onClick = {
-                        onSelect(i)
                         selected = i
+                        onSelect(selected)
                     }
                 )
             }
@@ -88,7 +90,10 @@ fun Question(
 
         Row {
             Button(
-                onClick = { onMove(-1) }
+                onClick = {
+                    onMove(-1)
+                    reselect()
+                }
             ) {
                 Text(
                     text = "<<",
@@ -104,7 +109,10 @@ fun Question(
             )
 
             Button(
-                onClick = { onMove(1) }
+                onClick = {
+                    onMove(1)
+                    reselect()
+                }
             ) {
                 Text(
                     text = ">>",
@@ -157,6 +165,7 @@ class CourseActivity : ComponentActivity() {
 
             Question(
                 course.questions[currentQuestion],
+                answers[currentQuestion],
                 currentQuestion,
                 course.questions.size,
                 onSelect,
